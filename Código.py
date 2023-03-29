@@ -49,11 +49,11 @@ def search():
     docsearch = FAISS.from_texts(texts, embeddings)
 
     # load the question-answering chain
-    chain = load_qa_chain(OpenAI(openai_api_key = api_key, temperature=0.3), chain_type="stuff")
+    chain = load_qa_chain(OpenAI(openai_api_key = api_key, temperature=0.5), chain_type="stuff")
 
     # perform the search
     query = query_entry.get()
-    prompt = "Responda a la pregunta basándose en el siguiente texto. Las respuestas deben ser elaboradas y basarse únicamente en el contexto. Comenta dónde se encuentra en el texto la información usada para responder. Elimina toda información que sea irrelevante para la respuesta"
+    prompt = "Responda a la pregunta basándose en el siguiente texto. Las respuestas deben ser elaboradas y basarse únicamente en el contexto. Comenta en qué página se encuentra en el texto la información usada para responder. Elimina toda información que sea irrelevante para la respuesta"
     query_with_prompt = prompt + query # se agrega el prompt al query
     docs = docsearch.similarity_search(query_with_prompt)
     result_text.delete('1.0', tk.END)
