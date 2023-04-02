@@ -11,7 +11,6 @@ from langchain.llms import OpenAI
 import pickle
 from langchain.chat_models import ChatOpenAI
 
-
 # define the functions
 def browse_pdf(pdf_entry):
     filename = filedialog.askopenfilename(title="Select a PDF", filetypes=[("PDF files", "*.pdf")])
@@ -53,7 +52,7 @@ def search():
 
     # perform the search
     query = query_entry.get()
-    prompt = "Responda a la pregunta basándose en el siguiente texto. Las respuestas deben ser elaboradas y basarse únicamente en el contexto. Comenta en qué página se encuentra en el texto la información usada para responder. Elimina toda información que sea irrelevante para la respuesta"
+    prompt = "Responda a la pregunta basándose en el siguiente texto. Las respuestas deben ser elaboradas y basarse únicamente en el contexto. Comenta en qué página se encuentra en el texto la información usada para responder. Elimina toda información que sea irrelevante para la respuesta. La respuesta generada debe estar en el idioma de la pregunta."
     query_with_prompt = prompt + query # se agrega el prompt al query
     docs = docsearch.similarity_search(query_with_prompt)
     result_text.delete('1.0', tk.END)
@@ -76,7 +75,9 @@ search_button = tk.Button(window, text="Search", command=search)
 api_key_label = tk.Label(window, text="Enter your OpenAI API key:")
 api_key_entry = tk.Entry(window, width=50)
 result_label = tk.Label(window, text="Results:")
-result_text = tk.Text(window, height=15)
+result_text = tk.Text(window, height=15,) 
+result_scrollbar = tk.Scrollbar(window)
+
 
 # place the widgets in the window
 api_key_entry.pack()
@@ -89,6 +90,9 @@ query_entry.pack()
 search_button.pack()
 result_label.pack()
 result_text.pack()
+result_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+result_text.config(yscrollcommand=result_scrollbar.set)
+result_scrollbar.config(command=result_text.yview)
 
 
 # configure the button to call the search function
