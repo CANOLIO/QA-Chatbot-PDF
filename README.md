@@ -1,4 +1,4 @@
-# QA-Chatbot-PDF
+# QA-Chatbot-PDF 📄
 
 Desktop application for asking questions about PDF documents using the Gemini API.
 
@@ -49,12 +49,3 @@ python src/Codigo.py
 # On Windows:
 Codigo.bat
 ```
-
-## Compilation
-
-To create an executable:
-```bash
-pyinstaller Codigo.spec
-```
-
-The executable will be generated in the `dist/` folder.
