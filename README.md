@@ -58,7 +58,3 @@ pyinstaller Codigo.spec
 ```
 
 The executable will be generated in the `dist/` folder.
-
-## License
-
-[Specify project license] 
